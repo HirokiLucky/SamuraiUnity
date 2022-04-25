@@ -7,11 +7,12 @@ using Debug = UnityEngine.Debug;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField]private SystemScript _systemScript;
     private TimeSpan enemyTime = new TimeSpan(0, 0, 0, 3, 0);
     private double PlayerTime = 0;
     private TimeSpan timer;
     private Stopwatch time;
-    private bool mode = false;
+    private bool boolian = false;
     
     
     // Start is called before the first frame update
@@ -25,21 +26,22 @@ public class Player : MonoBehaviour
     void Update()
     {
         Vector3 a = new Vector3(1,1,1);
+        
 
-        if(Input.GetKeyDown(KeyCode.A))
+        if(Input.GetKeyDown(KeyCode.A) && _systemScript.mode == 0)
         {
             time.Start();
-            mode = true;
+            boolian = true;
             Debug.Log("ON");
         }
 
-        if (Input.GetKeyDown(KeyCode.E) && mode)
+        if (Input.GetKeyDown(KeyCode.E) && boolian)
         {
             time.Stop();
             timer = time.Elapsed;
             Debug.Log(timer);
             time.Reset();
-            mode = false;
+            boolian = false;
         }
     }
 
